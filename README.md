@@ -1,2 +1,3 @@
-# Challenges
-Python Challenges
+# Python Challenges
+A repo for python challenges.
+
