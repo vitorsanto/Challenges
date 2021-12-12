@@ -1,5 +1,5 @@
-# Find Internal Nodes
-Find and return the number of internal nodes given a list of parent nodes.
+# Find Internal Nodes [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vitorsanto/Challenges/master?labpath=find_internal_nodes%2Ffind_internal_nodes.ipynb)
+Find and return the number of internal nodes given a list of parent nodes. 
 
 **Params**:
 * `tree`: List of parent nodes
