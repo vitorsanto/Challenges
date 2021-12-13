@@ -22,8 +22,15 @@ class UpdateSportsSerializer(serializers.Serializer):
         return slugify(instance.get('name', ''))
 
 
+class ListChildSportSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(read_only=True)
+    slug = serializers.CharField(read_only=True)
+    active = serializers.BooleanField(read_only=True)
+
+
 class ListSportsSerializer(serializers.Serializer):
     sports = serializers.ListField(
         allow_empty=True,
-        child=CreateSportsSerializer()
+        child=ListChildSportSerializer()
     )

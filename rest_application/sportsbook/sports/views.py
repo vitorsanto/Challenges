@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from sports.serializers import CreateSportsSerializer, ListSportsSerializer, UpdateSportsSerializer
 from sports.services import SportsService
 
-
 class CreateSportsView(generics.GenericAPIView):
     """
      #Create Sports
