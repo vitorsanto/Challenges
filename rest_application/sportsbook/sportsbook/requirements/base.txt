@@ -4,4 +4,6 @@ python-slugify==5.0.2  # https://github.com/un33k/python-slugify
 # Django
 # ------------------------------------------------------------------------------
 django==3.2.10 # https://www.djangoproject.com/
+djangorestframework==3.12.4 # https://www.django-rest-framework.org/
+markdown==3.3.6 # https://python-markdown.github.io/
 django-environ==0.8.1  # https://github.com/joke2k/django-environ
