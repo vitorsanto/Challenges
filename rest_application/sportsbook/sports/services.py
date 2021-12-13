@@ -9,8 +9,8 @@ class SportsService:
 
     @staticmethod
     def update_sport(payload):
-        return 'sport updated'
+        return {'data': payload, 'status': status.HTTP_200_OK}
 
     @staticmethod
-    def list_sport(payload):
-        return 'sports list'
+    def list_sports(payload):
+        return {'data': payload, 'status': status.HTTP_200_OK}
