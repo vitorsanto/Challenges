@@ -5,7 +5,7 @@ from pathlib import Path
 
 import environ
 
-ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent.parent
+ROOT_DIR = Path(__file__).parent.parent.parent.parent.resolve(strict=True)
 print(ROOT_DIR)
 # sportsbook/
 APPS_DIR = ROOT_DIR / "sportsbook"
@@ -53,11 +53,15 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
+THIRD_PARTY_APPS = [
+    'rest_framework',
+]
+
 LOCAL_APPS = [
-    # Your stuff: custom apps go here
+    'sports'
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -67,7 +71,7 @@ MIGRATION_MODULES = {}
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
-AUTHENTICATION_BACKENDS = []
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
 # MIDDLEWARE
 # ------------------------------------------------------------------------------
@@ -115,5 +119,14 @@ LOGGING = {
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
 STATIC_URL = "static/"
+
+# Django Rest Framework
+# ------------------------------------------------------------------------------
+# https://www.django-rest-framework.org/
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
+}
