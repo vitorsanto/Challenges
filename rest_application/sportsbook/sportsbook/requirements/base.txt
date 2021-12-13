@@ -1,0 +1,7 @@
+pytz==2021.3  # https://github.com/stub42/pytz
+python-slugify==5.0.2  # https://github.com/un33k/python-slugify
+
+# Django
+# ------------------------------------------------------------------------------
+django==3.2.10 # https://www.djangoproject.com/
+django-environ==0.8.1  # https://github.com/joke2k/django-environ
