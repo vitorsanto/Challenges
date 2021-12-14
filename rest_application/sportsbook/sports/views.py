@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from sports.serializers import CreateSportsSerializer, ListSportsSerializer, UpdateSportsSerializer
 from sports.services import SportsService
 
+
 class CreateSportsView(generics.GenericAPIView):
     """
      #Create Sports
@@ -14,9 +15,9 @@ class CreateSportsView(generics.GenericAPIView):
 
      ##Params:
 
-     * **name (str)**: Patch name.
+     * **name (str)**: Sport name.
 
-     * **active (int)**: Patch active.
+     * **active (int)**: Sport active.
 
      """
     name = 'create-sports'
@@ -66,8 +67,6 @@ class ListSportsView(generics.GenericAPIView):
 
     ##Supported Filters:
 
-    * **name (str)**: Search for sports by matching name.
-
     * **name_regex (str)**: Search for sports with names satisfying a particular regex.
 
     * **active_events[lte] (int)**: Search for sports with a number of active events less than or equal the filter.
@@ -83,6 +82,7 @@ class ListSportsView(generics.GenericAPIView):
     """
     name = 'list-sports'
     serializer_class = ListSportsSerializer
+    queryset = []
 
     def get(self, request, *args, **kwargs):
         response = SportsService.list_sports(request.query_params)

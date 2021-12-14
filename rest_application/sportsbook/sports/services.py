@@ -1,24 +1,21 @@
 from rest_framework import status
 
+from sports.repositories import SportsRepository
+
 
 class SportsService:
 
     @staticmethod
     def create_sports(payload):
-        return {'data': payload, 'status': status.HTTP_201_CREATED}
+        result = SportsRepository.create_sport(payload)
+        return {'data': result, 'status': status.HTTP_201_CREATED}
 
     @staticmethod
     def update_sport(payload):
-        return {'data': payload, 'status': status.HTTP_200_OK}
+        result = SportsRepository.update_sport(payload)
+        return {'data': result, 'status': status.HTTP_200_OK}
 
     @staticmethod
     def list_sports(query_params):
-        supported_filters = (
-            'name',
-            'name_regex',
-            'active_events[lte]',
-            'active_events[gte]',
-            'is_active'
-        )
-
-        return {'data': query_params, 'status': status.HTTP_200_OK}
+        result = SportsRepository.list_sports(query_params)
+        return {'data': result, 'status': status.HTTP_200_OK}
