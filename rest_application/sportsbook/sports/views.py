@@ -22,11 +22,12 @@ class CreateSportsView(generics.GenericAPIView):
      """
     name = 'create-sports'
     serializer_class = CreateSportsSerializer
+    sports_service = SportsService
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            response = SportsService.create_sports(serializer.data)
+            response = self.sports_service.create_sports(serializer.data)
             return Response(response['data'], status=response['status'])
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -49,13 +50,14 @@ class UpdateSportsView(generics.GenericAPIView):
     """
     name = 'update-sports'
     serializer_class = UpdateSportsSerializer
+    sports_service = SportsService
 
     def patch(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            sport = SportsService.fetch_sport(serializer.data['id'])
+            sport = self.sports_service.fetch_sport(serializer.data['id'])
             if sport:
-                response = SportsService.update_sport(serializer.data)
+                response = self.sports_service.update_sport(serializer.data)
                 return Response(response['data'], status=response['status'])
         else:
             return Response('Sport ID not found.', status=status.HTTP_404_NOT_FOUND)
@@ -82,8 +84,10 @@ class ListSportsView(generics.GenericAPIView):
     """
     name = 'list-sports'
     serializer_class = ListSportsSerializer
+    sports_service = SportsService
+
     queryset = []
 
     def get(self, request, *args, **kwargs):
-        response = SportsService.list_sports(request.query_params)
+        response = self.sports_service.list_sports(request.query_params)
         return Response(response['data'], status=response['status'])
