@@ -6,6 +6,7 @@ from sportsbook.config.api_root import ApiRoot
 
 urlpatterns = [
     path('sports/', include('sports.urls')),
+    path('events/', include('events.urls')),
     path('', ApiRoot.as_view(), name=ApiRoot.name)
 ]
 

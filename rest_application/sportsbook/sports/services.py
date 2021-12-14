@@ -19,3 +19,7 @@ class SportsService:
     def list_sports(query_params):
         result = SportsRepository.list_sports(query_params)
         return {'data': result, 'status': status.HTTP_200_OK}
+
+    @staticmethod
+    def fetch_sport(pk):
+        return SportsRepository.fetch_sport(pk)

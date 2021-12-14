@@ -40,8 +40,6 @@ class SportsRepository:
     def list_sports(filters):
         supported_filters = {
             'name_regex': {'expression': 'name REGEXP %s', 'value': filters.get('name_regex')},
-            # {'active_events[lte]': '%s > (SELECT COUNT(id) FROM events WHERE id = %s)'},
-            # 'active_events[gte]',
             'is_active': {'expression': 'active = %s', 'value': 1 if filters.get('is_active') else 0}
         }
 
@@ -71,3 +69,17 @@ class SportsRepository:
             sports = cursor.fetchall()
 
         return sports
+
+    @staticmethod
+    def fetch_sport(pk):
+        query = 'SELECT id FROM sports WHERE id = %s'
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                query,
+                [pk]
+            )
+
+            sport = cursor.fetchone()
+
+        return sport

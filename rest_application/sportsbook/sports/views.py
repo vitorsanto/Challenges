@@ -53,8 +53,12 @@ class UpdateSportsView(generics.GenericAPIView):
     def patch(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            response = SportsService.update_sport(serializer.data)
-            return Response(response['data'], status=response['status'])
+            sport = SportsService.fetch_sport(serializer.data['id'])
+            if sport:
+                response = SportsService.update_sport(serializer.data)
+                return Response(response['data'], status=response['status'])
+        else:
+            return Response('Sport ID not found.', status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -69,15 +73,11 @@ class ListSportsView(generics.GenericAPIView):
 
     * **name_regex (str)**: Search for sports with names satisfying a particular regex.
 
-    * **active_events[lte] (int)**: Search for sports with a number of active events less than or equal the filter.
-
-    * **active_events[gte] (int)**: Search for sports with a number of active events grater than or equal the filter.
-
     * **is_active (int)**: Search for active/inactive sports. The value must be 0 or 1.
 
 
     ## Query Example:
-        http://127.0.0.1:8000/sports/list?name_regex=[abc]&active_events[gte]=1 # filtering by name regex AND one or more active events
+        http://127.0.0.1:8000/sports/list?name_regex=abc&is_active=1 # filtering by name regex AND active events
 
     """
     name = 'list-sports'
