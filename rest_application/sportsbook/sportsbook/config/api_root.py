@@ -4,7 +4,7 @@ from rest_framework.reverse import reverse
 
 from sports import urls as sports_urls
 from events import urls as events_urls
-
+from selections import urls as selections_urls
 
 class ApiRoot(generics.GenericAPIView):
     """
@@ -13,7 +13,7 @@ class ApiRoot(generics.GenericAPIView):
     name = 'api-root'
 
     def get(self, request, *args, **kwargs):
-        urlpatterns = sports_urls.urlpatterns + events_urls.urlpatterns
+        urlpatterns = sports_urls.urlpatterns + events_urls.urlpatterns + selections_urls.urlpatterns
         json_response = {}
         for url in urlpatterns:
             json_response.update({url.name: reverse(url.name, request=request)})

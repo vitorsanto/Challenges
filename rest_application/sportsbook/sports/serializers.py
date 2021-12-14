@@ -16,7 +16,7 @@ class UpdateSportsSerializer(serializers.Serializer):
     id = serializers.IntegerField(required=True)
     name = serializers.CharField(max_length=100, allow_blank=True)
     slug = serializers.SerializerMethodField(read_only=True)
-    active = serializers.BooleanField()
+    active = serializers.BooleanField(allow_null=True)
 
     def get_slug(self, instance):
         return slugify(instance.get('name', ''))

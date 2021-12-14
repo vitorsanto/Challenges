@@ -1,34 +1,34 @@
 from rest_framework import status
 
-from sports.repositories import SportsRepository
+from selections.repositories import SelectionsRepository
 
 
-class SportsService:
+class SelectionsService:
 
     @staticmethod
-    def create_sports(payload):
+    def create_selections(payload):
         try:
-            result = SportsRepository.create_sport(payload)
+            result = SelectionsRepository.create_selection(payload)
             return {'data': result, 'status': status.HTTP_201_CREATED}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
     @staticmethod
-    def update_sport(payload):
+    def update_selections(payload):
         try:
-            result = SportsRepository.update_sport(payload)
+            result = SelectionsRepository.update_selection(payload)
             return {'data': result, 'status': status.HTTP_200_OK}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
     @staticmethod
-    def list_sports(query_params):
+    def list_selections(query_params):
         try:
-            result = SportsRepository.list_sports(query_params)
+            result = SelectionsRepository.list_selections(query_params)
             return {'data': result, 'status': status.HTTP_200_OK}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
     @staticmethod
-    def fetch_sport(pk):
-        return SportsRepository.fetch_sport(pk)
+    def fetch_selection(pk):
+        return SelectionsRepository.fetch_selection(pk)
