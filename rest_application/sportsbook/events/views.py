@@ -37,13 +37,19 @@ class CreateEventsView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            sport = self.sports_service.fetch_sport(serializer.data['sport_id'])
+            sport = self.get_sports_service().check_sport(serializer.data['sport_id'])
             if sport:
-                response = self.event_service.create_events(serializer.data)
+                response = self.get_event_service().create_events(serializer.data)
                 return Response(response['data'], status=response['status'])
             else:
                 return Response('Sport ID not found.', status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_sports_service(self):
+        return self.sports_service()
+
+    def get_event_service(self):
+        return self.event_service()
 
 
 class UpdateEventsView(generics.GenericAPIView):
@@ -75,14 +81,17 @@ class UpdateEventsView(generics.GenericAPIView):
     def patch(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            event = self.event_service.fetch_event(serializer.data['id'])
+            event = self.get_event_service().check_event(serializer.data['id'])
             if event:
-                response = self.event_service.update_events(serializer.data)
+                response = self.get_event_service().update_events(serializer.data)
                 return Response(response['data'], status=response['status'])
             else:
                 return Response('Event ID not found.', status=status.HTTP_404_NOT_FOUND)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_event_service(self):
+        return self.event_service()
 
 
 class ListEventsView(generics.GenericAPIView):
@@ -109,5 +118,8 @@ class ListEventsView(generics.GenericAPIView):
     queryset = []
 
     def get(self, request, *args, **kwargs):
-        response = self.event_service.list_events(request.query_params)
+        response = self.get_event_service().list_events(request.query_params)
         return Response(response['data'], status=response['status'])
+
+    def get_event_service(self):
+        return self.event_service()

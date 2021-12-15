@@ -30,5 +30,5 @@ class EventsService:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
     @staticmethod
-    def fetch_event(pk):
-        return EventsRepository.fetch_event(pk)
+    def check_event(pk):
+        return EventsRepository.check_event(pk)

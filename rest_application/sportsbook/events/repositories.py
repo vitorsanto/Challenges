@@ -10,7 +10,7 @@ class EventsRepository:
             VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
         values = [
-            payload['name'], payload['slug'], (1 if payload['active'] else 0), payload['type'], payload['sport'],
+            payload['name'], payload['slug'], (1 if payload['active'] else 0), payload['type'], payload['sport_id'],
             payload['status'], payload['scheduled_start']
         ]
 
@@ -84,8 +84,8 @@ class EventsRepository:
         return events
 
     @staticmethod
-    def fetch_event(pk):
-        query = 'SELECT id FROM events WHERE id = %s'
+    def check_event(pk):
+        query = 'SELECT count(id) FROM events WHERE id = %s'
 
         with connection.cursor() as cursor:
             cursor.execute(

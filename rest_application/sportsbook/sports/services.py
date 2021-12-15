@@ -4,31 +4,28 @@ from sports.repositories import SportsRepository
 
 
 class SportsService:
+    sports_repository = SportsRepository
 
-    @staticmethod
-    def create_sports(payload):
+    def create_sports(self, payload):
         try:
-            result = SportsRepository.create_sport(payload)
+            result = self.sports_repository.create_sport(payload)
             return {'data': result, 'status': status.HTTP_201_CREATED}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
-    @staticmethod
-    def update_sport(payload):
+    def update_sport(self, payload):
         try:
-            result = SportsRepository.update_sport(payload)
+            result = self.sports_repository.update_sport(payload)
             return {'data': result, 'status': status.HTTP_200_OK}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
-    @staticmethod
-    def list_sports(query_params):
+    def list_sports(self, query_params):
         try:
-            result = SportsRepository.list_sports(query_params)
+            result = self.sports_repository.list_sports(query_params)
             return {'data': result, 'status': status.HTTP_200_OK}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
-    @staticmethod
-    def fetch_sport(pk):
-        return SportsRepository.fetch_sport(pk)
+    def check_sport(self, pk):
+        return self.sports_repository.check_sport(pk)

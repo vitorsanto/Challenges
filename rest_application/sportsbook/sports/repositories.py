@@ -71,7 +71,7 @@ class SportsRepository:
         return sports
 
     @staticmethod
-    def fetch_sport(pk):
+    def check_sport(pk):
         query = 'SELECT id FROM sports WHERE id = %s'
 
         with connection.cursor() as cursor:

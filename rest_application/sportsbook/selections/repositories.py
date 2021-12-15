@@ -87,8 +87,8 @@ class SelectionsRepository:
         return selections
 
     @staticmethod
-    def fetch_selection(pk):
-        query = 'SELECT id FROM selections WHERE id = %s'
+    def check_selection(pk):
+        query = 'SELECT count(id) FROM selections WHERE id = %s'
 
         with connection.cursor() as cursor:
             cursor.execute(

@@ -4,31 +4,28 @@ from selections.repositories import SelectionsRepository
 
 
 class SelectionsService:
+    selections_repository = SelectionsRepository
 
-    @staticmethod
-    def create_selections(payload):
+    def create_selections(self, payload):
         try:
-            result = SelectionsRepository.create_selection(payload)
+            result = self.selections_repository.create_selection(payload)
             return {'data': result, 'status': status.HTTP_201_CREATED}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
-    @staticmethod
-    def update_selections(payload):
+    def update_selections(self, payload):
         try:
-            result = SelectionsRepository.update_selection(payload)
+            result = self.selections_repository.update_selection(payload)
             return {'data': result, 'status': status.HTTP_200_OK}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
-    @staticmethod
-    def list_selections(query_params):
+    def list_selections(self, query_params):
         try:
-            result = SelectionsRepository.list_selections(query_params)
+            result = self.selections_repository.list_selections(query_params)
             return {'data': result, 'status': status.HTTP_200_OK}
         except Exception as e:
             return {'data': str(e), 'status': status.HTTP_500_INTERNAL_SERVER_ERROR}
 
-    @staticmethod
-    def fetch_selection(pk):
-        return SelectionsRepository.fetch_selection(pk)
+    def check_selection(self, pk):
+        return self.selections_repository.check_selection(pk)
