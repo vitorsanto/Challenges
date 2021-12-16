@@ -16,12 +16,12 @@ def create_sports_serializer_error_fixture():
 
 @pytest.fixture
 def update_sports_serializer_fixture():
-    return QueryDict('id=1&name=Golf&active=null')
+    return QueryDict('id=1&name=Golf&active=')
 
 
 @pytest.fixture
 def update_sports_serializer_error_fixture():
-    return QueryDict('id=&name=Golf&active=null')
+    return QueryDict('id=&name=Golf&active=')
 
 
 def test_create_sports_serializer(create_sports_serializer_fixture):

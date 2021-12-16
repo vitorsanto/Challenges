@@ -17,7 +17,7 @@ class CreateEventsSerializer(serializers.Serializer):
     scheduled_start = serializers.DateTimeField(required=True)
 
     def get_slug(self, instance):
-        return slugify(instance['name'])
+        return slugify(instance.get('name', ''))
 
 
 class UpdateEventsSerializer(serializers.Serializer):
@@ -32,14 +32,14 @@ class UpdateEventsSerializer(serializers.Serializer):
     )
     sport_id = serializers.IntegerField(allow_null=True)
     status = serializers.ChoiceField(
-        choices=('Pending', 'Started', 'Ended', 'Cancelled'),
+        choices=('pending', 'started', 'ended', 'cancelled'),
         allow_null=True,
         allow_blank=True
     )
     scheduled_start = serializers.DateTimeField(allow_null=True)
 
     def get_slug(self, instance):
-        return slugify(instance['name'])
+        return slugify(instance.get('name', ''))
 
     def to_representation(self, instance):
         result = super(UpdateEventsSerializer, self).to_representation(instance)

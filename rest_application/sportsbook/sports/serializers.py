@@ -11,7 +11,7 @@ class CreateSportsSerializer(serializers.Serializer):
     active = serializers.BooleanField()
 
     def get_slug(self, instance):
-        return slugify(instance['name'])
+        return slugify(instance.get('name', ''))
 
 
 class UpdateSportsSerializer(serializers.Serializer):
