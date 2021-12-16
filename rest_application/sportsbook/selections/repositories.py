@@ -34,13 +34,17 @@ class SelectionsRepository:
         values = []
 
         for field, value in payload.items():
-            if field != 'id' and value:
+            if field not in ('id', 'active') and value:
                 query.append(f'{field} = %s')
                 values.append(value)
 
+        query.append('active = %s')
+        values.append(payload['active'])
+
         with connection.cursor() as cursor:
             if query:
-                query = 'UPDATE selections SET ' + ', '.join(query)
+                query = 'UPDATE selections SET ' + ', '.join(query) + 'WHERE id = %s'
+                values.append(payload['id'])
                 cursor.execute(query, values)
 
             cursor.execute(
@@ -99,3 +103,15 @@ class SelectionsRepository:
             selection = cursor.fetchone()
 
         return selection
+
+    @staticmethod
+    def selections_active_from_event(event_id):
+        with connection.cursor() as cursor:
+            cursor.execute(
+                "SELECT count(id) FROM selections WHERE event_id = %s AND active = 1",
+                [event_id]
+            )
+
+            selections_active = cursor.fetchone()
+
+        return selections_active[0]

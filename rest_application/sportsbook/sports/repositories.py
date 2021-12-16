@@ -21,13 +21,17 @@ class SportsRepository:
         values = []
 
         for field, value in payload.items():
-            if field != 'id' and value:
+            if field not in ('id', 'active') and value:
                 query.append(f'{field} = %s')
                 values.append(value)
 
+        query.append('active = %s')
+        values.append(payload['active'])
+
         with connection.cursor() as cursor:
             if query:
-                query = 'UPDATE sports SET ' + ', '.join(query)
+                query = 'UPDATE sports SET ' + ', '.join(query) + 'WHERE id = %s'
+                values.append(payload['id'])
                 cursor.execute(query, values)
 
             cursor.execute("SELECT id, name, slug, active FROM sports WHERE id = %s", [payload['id']])

@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from events.services import EventsService
 from selections.serializers import ListSelectionsSerializer, CreateSelectionsSerializer, UpdateSelectionsSerializer
 from selections.services import SelectionsService
-from sports.services import SportsService
 
 
 class CreateSelectionsView(generics.GenericAPIView):
@@ -32,8 +31,8 @@ class CreateSelectionsView(generics.GenericAPIView):
      """
     name = 'create-selections'
     serializer_class = CreateSelectionsSerializer
-    event_service = EventsService
-    selection_service = SelectionsService
+    event_service_class = EventsService
+    selection_service_class = SelectionsService
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -47,10 +46,10 @@ class CreateSelectionsView(generics.GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_event_service(self):
-        return self.event_service()
+        return self.event_service_class()
 
     def get_selection_service(self):
-        return self.selection_service()
+        return self.selection_service_class()
 
 
 class UpdateSelectionsView(generics.GenericAPIView):
@@ -77,7 +76,7 @@ class UpdateSelectionsView(generics.GenericAPIView):
     """
     name = 'update-selections'
     serializer_class = UpdateSelectionsSerializer
-    selection_service = SelectionsService
+    selection_service_class = SelectionsService
 
     def patch(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -92,7 +91,7 @@ class UpdateSelectionsView(generics.GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get_selection_service(self):
-        return self.selection_service()
+        return self.selection_service_class()
 
 
 class ListSelectionsView(generics.GenericAPIView):
@@ -115,7 +114,7 @@ class ListSelectionsView(generics.GenericAPIView):
     """
     name = 'list-selections'
     serializer_class = ListSelectionsSerializer
-    selection_service = SelectionsService
+    selection_service_class = SelectionsService
     queryset = []
 
     def get(self, request, *args, **kwargs):
@@ -123,4 +122,4 @@ class ListSelectionsView(generics.GenericAPIView):
         return Response(response['data'], status=response['status'])
 
     def get_selection_service(self):
-        return self.selection_service()
+        return self.selection_service_class()
