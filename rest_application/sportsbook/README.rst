@@ -23,7 +23,7 @@ $ make run
 Running tests
 ----------
 
-To run the solution locally, run the following command on the sportsbook folder; The same folder where the makefile is located:
+To run the solution's test suit, run the following command on the sportsbook folder; The same folder where the makefile is located:
 
 ::
 
