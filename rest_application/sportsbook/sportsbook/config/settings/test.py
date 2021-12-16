@@ -14,3 +14,13 @@ SECRET_KEY = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#test-runner
 TEST_RUNNER = "django.test.runner.DiscoverRunner"
+
+# DATABASE
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': f'{ROOT_DIR}/db/test_sportsbook',
+    }
+}

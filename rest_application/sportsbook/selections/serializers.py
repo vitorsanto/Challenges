@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from rest_framework import serializers
 
 from selections.models import SelectionsModel
@@ -19,6 +21,10 @@ class UpdateSelectionsSerializer(serializers.Serializer):
     price = serializers.FloatField(allow_null=True)
     active = serializers.BooleanField(allow_null=True)
     outcome = serializers.ChoiceField(choices=SelectionsModel.OUTCOME, allow_blank=True)
+
+    def to_representation(self, instance):
+        result = super(UpdateSelectionsSerializer, self).to_representation(instance)
+        return OrderedDict([(key, result[key]) for key in result if result[key] not in (None, '')])
 
 
 class ListChildSportSerializer(serializers.Serializer):

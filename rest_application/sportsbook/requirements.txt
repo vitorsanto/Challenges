@@ -9,7 +9,8 @@ django-environ==0.8.1  # https://github.com/joke2k/django-environ
 # ------------------------------------------------------------------------------
 pytest==6.2.5  # https://github.com/pytest-dev/pytest
 pytest-sugar==0.9.4  # https://github.com/Frozenball/pytest-sugar
-pytest-factoryboy==2.1.0
+pytest-factoryboy==2.1.0 3 https://github.com/pytest-dev/pytest-factoryboy
+pytest-mock=3.6.1 # https://github.com/pytest-dev/pytest-mock/
 
 # Django
 # ------------------------------------------------------------------------------

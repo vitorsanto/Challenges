@@ -21,12 +21,9 @@ class SportsRepository:
         values = []
 
         for field, value in payload.items():
-            if field not in ('id', 'active') and value:
+            if field != 'id':
                 query.append(f'{field} = %s')
                 values.append(value)
-
-        query.append('active = %s')
-        values.append(payload['active'])
 
         with connection.cursor() as cursor:
             if query:
@@ -52,7 +49,7 @@ class SportsRepository:
         query = 'SELECT * FROM sports '
 
         for _filter, value in filters.items():
-            if _filter in supported_filters.keys() and value:
+            if _filter in supported_filters.keys() and len(str(value)):
 
                 if len(query_filters) < 1:
                     query_filters.append(f'WHERE {supported_filters[_filter]["expression"]}')
@@ -64,7 +61,7 @@ class SportsRepository:
         with connection.cursor() as cursor:
             if query_filters:
                 query = query + ' '.join(query_filters)
-
+                print(query)
             cursor.execute(
                 query,
                 filter_values

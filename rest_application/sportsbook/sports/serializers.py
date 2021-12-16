@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from django.utils.text import slugify
 from rest_framework import serializers
 
@@ -14,12 +16,16 @@ class CreateSportsSerializer(serializers.Serializer):
 
 class UpdateSportsSerializer(serializers.Serializer):
     id = serializers.IntegerField(required=True)
-    name = serializers.CharField(max_length=100, allow_blank=True)
+    name = serializers.CharField(max_length=100, allow_blank=True, allow_null=True)
     slug = serializers.SerializerMethodField(read_only=True)
     active = serializers.BooleanField(allow_null=True)
 
     def get_slug(self, instance):
         return slugify(instance.get('name', ''))
+
+    def to_representation(self, instance):
+        result = super(UpdateSportsSerializer, self).to_representation(instance)
+        return OrderedDict([(key, result[key]) for key in result if result[key] not in (None, '')])
 
 
 class ListChildSportSerializer(serializers.Serializer):

@@ -1,4 +1,4 @@
-from datetime import datetime
+from collections import OrderedDict
 
 from django.utils.text import slugify
 from rest_framework import serializers
@@ -22,16 +22,28 @@ class CreateEventsSerializer(serializers.Serializer):
 
 class UpdateEventsSerializer(serializers.Serializer):
     id = serializers.IntegerField(required=True)
-    name = serializers.CharField(max_length=100, allow_blank=True)
+    name = serializers.CharField(max_length=100, allow_null=True, allow_blank=True)
     slug = serializers.SerializerMethodField(read_only=True)
-    active = serializers.BooleanField()
-    type = serializers.ChoiceField(choices=('preplay', 'inplay'), allow_blank=True)
+    active = serializers.CharField(allow_null=True, allow_blank=True)
+    type = serializers.ChoiceField(
+        choices=('preplay', 'inplay'),
+        allow_null=True,
+        allow_blank=True
+    )
     sport_id = serializers.IntegerField(allow_null=True)
-    status = serializers.ChoiceField(choices=('Pending', 'Started', 'Ended', 'Cancelled'), allow_blank=True)
+    status = serializers.ChoiceField(
+        choices=('Pending', 'Started', 'Ended', 'Cancelled'),
+        allow_null=True,
+        allow_blank=True
+    )
     scheduled_start = serializers.DateTimeField(allow_null=True)
 
     def get_slug(self, instance):
         return slugify(instance['name'])
+
+    def to_representation(self, instance):
+        result = super(UpdateEventsSerializer, self).to_representation(instance)
+        return OrderedDict([(key, result[key]) for key in result if result[key] not in (None, '')])
 
 
 class ListChildSportSerializer(serializers.Serializer):

@@ -30,12 +30,9 @@ class EventsRepository:
         values = []
 
         for field, value in payload.items():
-            if field not in ('id', 'active') and value:
+            if field != 'id':
                 query.append(f'{field} = %s')
                 values.append(value)
-
-        query.append('active = %s')
-        values.append(payload['active'])
 
         with connection.cursor() as cursor:
             if query:

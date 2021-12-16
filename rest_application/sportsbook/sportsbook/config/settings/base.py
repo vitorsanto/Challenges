@@ -40,7 +40,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "sportsbook.config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = "config.wsgi.application"
 
