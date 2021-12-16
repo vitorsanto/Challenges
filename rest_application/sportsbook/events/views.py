@@ -109,7 +109,7 @@ class ListEventsView(generics.GenericAPIView):
 
 
     ## Query Example:
-        http://127.0.0.1:8000/events/list?name_regex=[abc]&active_events[gte]=1 # filtering by name regex AND one or more active events
+        http://127.0.0.1:8000/events/list?name_regex=[abc]&is_active=1 # filtering by name regex AND active events
 
     """
     name = 'list-events'

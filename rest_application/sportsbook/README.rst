@@ -10,15 +10,21 @@ A simple REST API which manages multiple sports, events and selections.
 Basic Commands
 --------------
 
-Running tests with py.test
+Running locally
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To run the solution locally, run the following command on the sportsbook folder; The same folder where the makefile is located:
 
 ::
 
-$ pytest
+$ make run
 
 
-Deployment
+Running tests
 ----------
 
-The following details how to deploy this application.
+To run the solution locally, run the following command on the sportsbook folder; The same folder where the makefile is located:
+
+::
+
+$ make test

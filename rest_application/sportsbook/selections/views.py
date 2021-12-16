@@ -109,7 +109,7 @@ class ListSelectionsView(generics.GenericAPIView):
 
 
     ## Query Example:
-        http://127.0.0.1:8000/selections/list?name_regex=[abc]&active_selections[gte]=1 # filtering by name regex AND one or more active selections
+        http://127.0.0.1:8000/selections/list?name_regex=[abc]&is_active=1 # filtering by name regex AND active selections
 
     """
     name = 'list-selections'
