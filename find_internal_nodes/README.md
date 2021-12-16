@@ -1,5 +1,6 @@
-# Find Internal Nodes
-___
+Find Internal Nodes
+==========
+
 Find and return the number of internal nodes given a list of parent nodes.
 
 **Params**:
@@ -8,8 +9,14 @@ Find and return the number of internal nodes given a list of parent nodes.
 **Return**:
 * `int`: Number of internal nodes
 
+Basic Commands
+--------------
 
-# Running
-___
-* **Online**: The solution can be tested online using Binder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vitorsanto/Challenges/master?labpath=find_internal_nodes%2Ffind_internal_nodes.ipynb)
-* **Local**: run the command `make run` inside the folder `find_internal_nodes`.
+Running locally
+----------
+
+To run the solution locally, run the following command on the sportsbook folder; The same folder where the makefile is located:
+
+~~~
+$ make run
+~~~
