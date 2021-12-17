@@ -85,3 +85,10 @@ def test_list_events_filters(list_event_fixture):
 def test_check_event(update_event_fixture):
     sport = EventsRepository.check_event(update_event_fixture['id'])
     assert sport[0] == update_event_fixture['id']
+
+
+@pytest.mark.django_db
+def test_events_active_from_sport(update_event_fixture):
+    update_event_fixture
+    selections = EventsRepository.events_active_from_sport(1)
+    assert selections == 1

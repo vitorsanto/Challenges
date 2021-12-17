@@ -65,7 +65,7 @@ class SelectionsRepository:
         query = 'SELECT * FROM selections '
 
         for _filter, value in filters.items():
-            if _filter in supported_filters.keys() and value:
+            if _filter in supported_filters.keys() and len(str(value)):
 
                 if len(query_filters) < 1:
                     query_filters.append(f'WHERE {supported_filters[_filter]["expression"]}')
