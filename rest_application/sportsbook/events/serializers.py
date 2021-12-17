@@ -24,7 +24,7 @@ class UpdateEventsSerializer(serializers.Serializer):
     id = serializers.IntegerField(required=True)
     name = serializers.CharField(max_length=100, allow_null=True, allow_blank=True)
     slug = serializers.SerializerMethodField(read_only=True)
-    active = serializers.CharField(allow_null=True, allow_blank=True)
+    active = serializers.BooleanField(allow_null=True)
     type = serializers.ChoiceField(
         choices=('preplay', 'inplay'),
         allow_null=True,
