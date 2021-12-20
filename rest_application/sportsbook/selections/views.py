@@ -15,18 +15,16 @@ class CreateSelectionsView(generics.GenericAPIView):
      ---
 
      ##Params:
+     
+     * **name (str)**: selection name.
 
-     * **name (str)**: event name.
+     * **event (int)**: event id.
+     
+     * **price (float, 2 decimal places)**: selection price.
 
-     * **active (int)**: event active.
+     * **active (int)**: selection active.
 
-     * **Type (str)**: event type.
-
-     * **Sport (int)**: event id.
-
-     * **Status (str)**: event status.
-
-     * **Scheduled start (datetime)**: event scheduled start.
+     * **outcome (str)**: selection outcome (Unsettled, Void, Lose or Win).
 
      """
     name = 'create-selections'
@@ -61,17 +59,15 @@ class UpdateSelectionsView(generics.GenericAPIView):
 
     ##Params:
 
-     * **name (str)**: patch event name.
+    * **name (str)**: patch selection name.
 
-     * **active (int)**: patch event active.
+    * **event (int)**: patch event id.
+     
+    * **price (float, 2 decimal places)**: patch selection price.
 
-     * **Type (str)**: patch event type.
+    * **active (int)**: patch selection active.
 
-     * **Sport (int)**: patch event id.
-
-     * **Status (str)**: patch event status.
-
-     * **Scheduled start (datetime)**: event scheduled start.
+    * **outcome (str)**: patch selection outcome (Unsettled, Void, Lose or Win).
 
     """
     name = 'update-selections'
