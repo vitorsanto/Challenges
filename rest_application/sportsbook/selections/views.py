@@ -10,7 +10,7 @@ from selections.services import SelectionsService
 class CreateSelectionsView(generics.GenericAPIView):
     """
      #Create Selections
-     Create a event.
+     Create a selection.
 
      ---
 
@@ -53,7 +53,7 @@ class CreateSelectionsView(generics.GenericAPIView):
 class UpdateSelectionsView(generics.GenericAPIView):
     """
     #Update Selections
-    Update a event.
+    Update a selection.
 
     ---
 
