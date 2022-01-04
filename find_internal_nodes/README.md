@@ -15,7 +15,7 @@ Basic Commands
 Running locally
 ----------
 
-To run the solution locally, run the following command on the sportsbook folder; The same folder where the makefile is located:
+To run the solution locally, run the following command on the find_internal_nodes folder; The same folder where the makefile is located:
 
 ~~~
 $ make run
